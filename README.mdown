@@ -2,7 +2,9 @@ D4 stands for 'Droid Dropbox Directory Downloader, and as its name suggests, fac
 To use, simply build to your phone, then go to the Dropbox app, choose a directory and long press it. Tap Share To, then choose this app (currently still called MainActivity). The folder should now be in the downloads directory of your phone!
 
 To do:
-Files are not yet downloaded prooperly -  a problem with the buffer in the download method. Fix one method, the whole program will work.
 Progress bar.
 better data strucutres - associate arrays for lists of files and folders.
 Add all exception catching and error messages.
+icon and name
+text box for url if not launched from dropbox
+option to visit folder when download completes

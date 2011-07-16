@@ -31,7 +31,8 @@ public class MainActivity extends Activity
                 url += "#view:list";
             }
             catch(Exception e){
-                url = "https://www.dropbox.com/s/z8h4493jaqxg2ri#view:list";
+                url = "https://www.dropbox.com/s/8owsfcia59ko76i#view:list"; //Used for testing if it's not opened from the dropox action menu
+                //Obviously what needs to happen here is a message suggesting that the user use the dropbox app, and a textbox in case they've got the url copied.
             }
             
             String page = getData(url);
@@ -49,7 +50,7 @@ public class MainActivity extends Activity
     public void getFilesFromFolder(List filesAndFolders, String savePath){
         // create a File object for the parent directory
         File downloadsDirectory = new File(savePath);
-        // have the object build the directory structure, if needed.
+        //create the folder if needed.
         downloadsDirectory.mkdir();
 
         for (int i = 0; i < filesAndFolders.size(); i++){
@@ -81,26 +82,28 @@ public class MainActivity extends Activity
     }
     
     public void downloadFile(String url, String savePath, String fileName){
-        URL u; HttpURLConnection c; FileOutputStream f;
-        try{
-            u = new URL(url);
-            c = (HttpURLConnection) u.openConnection();
-            c.setRequestMethod("GET");
-            c.setDoOutput(true);
-            c.connect();
-            f = new FileOutputStream(new File(savePath, fileName));
-            InputStream in = c.getInputStream();
-
-            byte[] buffer = new byte[1024];
-            int len1 = 0;
-            while ((len1 = in.read(buffer)) != -1) {
-                f.write(buffer, 0, len1);
+        
+        try {
+            URL theURL = new URL(url);
+            InputStream input = theURL.openStream();
+            OutputStream output = new FileOutputStream (new File(savePath, fileName));
+            try {
+                byte[] buffer = new byte[1024];
+                int bytesRead = 0;
+                while ((bytesRead = input.read(buffer, 0, buffer.length)) >= 0) {
+                    output.write(buffer, 0, bytesRead);
+                }
+            } 
+            catch(Exception e){
+                debug(e.toString());
             }
-            f.close();
-        }
+            finally {
+                output.close();
+            }
+        } 
         catch(Exception e){
             debug(e.toString());
-        }  
+        }
     }
     
     public String getData(String url){
@@ -170,12 +173,15 @@ public class MainActivity extends Activity
                     Element anchor = (Element) anchors.item(0);
                     String attr = anchor.getAttribute("href");
                     String fileName = anchor.getAttribute("title");
+                    String fileURL;
                     if(isFolder && !attr.equals("#")){
                         folders.add(attr);
                         folders.add(fileName);
                     }
                     else if(!isFolder && !attr.equals("#")){
-                        files.add(attr);
+                        //Dropbox uses ajax to get the file for download, so the url isn't enough. We must be sneaky here.
+                        fileURL = "https://dl.dropbox.com" + attr.substring(23) + "?dl=1";
+                        files.add(fileURL);
                         files.add(fileName);
                     }
                 }
