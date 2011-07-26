@@ -4,8 +4,8 @@ To use, simply download the APK and install to your phone, then go to the Dropbo
 *******************
 **To do:**
 
--Progress bar.
--Better data strucutres - associative arrays / dictionaries for lists of files and folders.
--Add all exception catching and error messages.
--Text box for url if not launched from dropbox.
--Option to visit folder when download completes.
+- Progress bar.
+- Better data strucutres - associative arrays / dictionaries for lists of files and folders.
+- Add all exception catching and error messages.
+- Text box for url if not launched from dropbox.
+- Option to visit folder when download completes.
