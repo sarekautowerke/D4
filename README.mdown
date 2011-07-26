@@ -1,10 +1,9 @@
 D4 stands for 'Droid Dropbox Directory Downloader, and as its name suggests, facilitates downloads of enitre folders from the Dropbox app for Android phones. Quite a specific purpose, but the current app only allows files to be added, and I felt support for folders would be nice too.
-To use, simply build to your phone, then go to the Dropbox app, choose a directory and long press it. Tap Share To, then choose this app (currently still called MainActivity). The folder should now be in the downloads directory of your phone!
+To use, simply download the APK and install to your phone, then go to the Dropbox app, choose a directory and long press it. Tap "Share To", then choose this app. The folder should now be in the downloads directory of your phone!
 
 To do:
 Progress bar.
-better data strucutres - associate arrays for lists of files and folders.
+Better data strucutres - associative arrays / dictionaries for lists of files and folders.
 Add all exception catching and error messages.
-icon and name
-text box for url if not launched from dropbox
-option to visit folder when download completes
+Text box for url if not launched from dropbox.
+Option to visit folder when download completes.
